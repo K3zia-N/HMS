@@ -1,4 +1,4 @@
-# LurniHostel - Hostel Management System
+ - Hostel Management System
 
 A full-stack, functional, and beautiful Hostel Management System designed with **React.js** for the frontend and **Django** for the backend. 
 
