@@ -334,8 +334,8 @@ function AuthPage({ onAuthSuccess }) {
         {/* Artwork Panel (Still Life Painting) */}
         <div className="auth-image-side">
           <img
-            src="/bed.png"
-            alt="Dutch Golden Age Still Life Painting"
+            src="/hms.png"
+            alt="Hostel Management System"
             className="auth-painting"
           />
         </div>
