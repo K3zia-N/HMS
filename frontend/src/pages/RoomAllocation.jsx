@@ -132,7 +132,7 @@ function RoomAllocation({ user }) {
               <span className="status-pill approved" style={{ padding: '6px 14px' }}>Allocated</span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '8px' }}>
+            <div className="responsive-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '8px' }}>
               <div style={{ padding: '20px', borderRadius: '12px', backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-color)' }}>
                 <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginBottom: '6px' }}>Hostel Residence</div>
                 <div style={{ fontWeight: '700', fontSize: '1.1rem' }}>{profile.hostel_name}</div>
@@ -248,8 +248,8 @@ function RoomAllocation({ user }) {
             Successfully allocated <strong style={{ color: 'var(--emerald)' }}>{bulkResult.success_count}</strong> students.
             Failed to allocate <strong style={{ color: 'var(--burgundy)' }}>{bulkResult.fail_count}</strong> students due to capacity.
           </p>
-          {bulkResult.allocations.length > 0 && (
-            <div style={{ maxHeight: '180px', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: '10px' }}>
+            {bulkResult.allocations.length > 0 && (
+            <div className="table-responsive-wrap" style={{ maxHeight: '180px', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: '10px' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', textAlign: 'left' }}>
                 <thead>
                   <tr style={{ backgroundColor: 'var(--secondary-bg)', borderBottom: '1px solid var(--border-color)' }}>
@@ -332,7 +332,7 @@ function RoomAllocation({ user }) {
         <div className="panel-header" style={{ marginBottom: '16px' }}>
           <h2 style={{ fontSize: '1.15rem' }}>Detailed Rooms Occupancy</h2>
         </div>
-        <div style={{ overflowX: 'auto' }}>
+        <div className="table-responsive-wrap" style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid var(--border-color)', backgroundColor: 'var(--secondary-bg)' }}>

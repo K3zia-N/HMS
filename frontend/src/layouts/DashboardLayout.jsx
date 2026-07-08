@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -9,11 +9,16 @@ import {
   QrCode, 
   LogOut, 
   Search,
-  Bell
+  Bell,
+  Menu,
+  X
 } from 'lucide-react';
 
 function DashboardLayout({ children, user }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
+
+  const closeSidebar = () => setSidebarOpen(false);
 
   const handleLogout = () => {
     localStorage.removeItem('access_token');
@@ -39,8 +44,14 @@ function DashboardLayout({ children, user }) {
 
   return (
     <div className="dashboard-container">
+      {/* Mobile Overlay */}
+      <div 
+        className={`sidebar-overlay ${sidebarOpen ? 'open' : ''}`} 
+        onClick={closeSidebar}
+      />
+
       {/* Sidebar Navigation */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div>
           <div className="sidebar-logo">
             <div className="sidebar-logo-icon">H</div>
@@ -52,6 +63,7 @@ function DashboardLayout({ children, user }) {
               <NavLink 
                 to="/dashboard" 
                 className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
+                onClick={closeSidebar}
               >
                 <LayoutDashboard size={20} />
                 <span>Dashboard</span>
@@ -61,6 +73,7 @@ function DashboardLayout({ children, user }) {
               <NavLink 
                 to="/profile" 
                 className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
+                onClick={closeSidebar}
               >
                 <User size={20} />
                 <span>My Profile</span>
@@ -70,6 +83,7 @@ function DashboardLayout({ children, user }) {
               <NavLink 
                 to="/allocation" 
                 className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
+                onClick={closeSidebar}
               >
                 <KeyRound size={20} />
                 <span>Room Allocation</span>
@@ -79,6 +93,7 @@ function DashboardLayout({ children, user }) {
               <NavLink 
                 to="/complaints" 
                 className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
+                onClick={closeSidebar}
               >
                 <Wrench size={20} />
                 <span>Complaints</span>
@@ -88,6 +103,7 @@ function DashboardLayout({ children, user }) {
               <NavLink 
                 to="/gatepasses" 
                 className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
+                onClick={closeSidebar}
               >
                 <QrCode size={20} />
                 <span>Gate Passes</span>
@@ -97,6 +113,7 @@ function DashboardLayout({ children, user }) {
               <NavLink 
                 to="/feedback" 
                 className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
+                onClick={closeSidebar}
               >
                 <MessageSquarePlus size={20} />
                 <span>Feedback</span>
@@ -130,8 +147,17 @@ function DashboardLayout({ children, user }) {
       <main className="main-content">
         {/* Top Header Bar */}
         <div className="top-bar">
-          <div className="top-bar-title">
-            <h1>Hostel Management</h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <button 
+              className="hamburger-btn" 
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              title="Toggle Menu"
+            >
+              {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+            <div className="top-bar-title">
+              <h1>Hostel Management</h1>
+            </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             <div className="top-bar-search">

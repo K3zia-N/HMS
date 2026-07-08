@@ -218,7 +218,7 @@ function Profile({ user, onProfileUpdate }) {
             <h2>Current Hostel Placement</h2>
           </div>
           {roomInfo ? (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div className="responsive-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div className="metric-icon-wrapper emerald" style={{ width: '40px', height: '40px' }}>
                   <Award size={18} />

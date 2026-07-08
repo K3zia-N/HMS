@@ -245,7 +245,7 @@ function GatePasses({ user }) {
                       </div>
                     </div>
 
-                    <div style={{ marginTop: '16px', borderTop: '1px solid var(--border-color)', paddingTop: '10px', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', justifyContent: 'space-between' }}>
+                    <div style={{ marginTop: '16px', borderTop: '1px solid var(--border-color)', paddingTop: '10px', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '4px' }}>
                       <span>Ref: {p.qr_code_data}</span>
                       <span>Approved: {p.approved_by_name}</span>
                     </div>
@@ -285,7 +285,7 @@ function GatePasses({ user }) {
         {passes.length === 0 ? (
           <p style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '30px' }}>No gate pass requests in system.</p>
         ) : (
-          <div style={{ overflowX: 'auto' }}>
+          <div className="table-responsive-wrap" style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid var(--border-color)', backgroundColor: 'var(--secondary-bg)' }}>

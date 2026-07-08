@@ -170,7 +170,7 @@ function AuthPage({ onAuthSuccess }) {
 
             {!isLogin && (
               <>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div className="responsive-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                   <div className="form-group">
                     <label>First Name</label>
                     <input
@@ -224,7 +224,7 @@ function AuthPage({ onAuthSuccess }) {
             {/* Student specific fields (Only shown during Sign Up for Students) */}
             {!isLogin && role === 'STUDENT' && (
               <>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div className="responsive-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                   <div className="form-group">
                     <label>Registration Number</label>
                     <input
@@ -263,7 +263,7 @@ function AuthPage({ onAuthSuccess }) {
                   />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div className="responsive-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                   <div className="form-group">
                     <label>Phone Number</label>
                     <input

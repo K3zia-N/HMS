@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Environment
+.env
+.venv
+venv/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
