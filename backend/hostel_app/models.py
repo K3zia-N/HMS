@@ -21,7 +21,6 @@ class Hostel(models.Model):
     GENDER_CHOICES = (
         ('MALE', 'Male'),
         ('FEMALE', 'Female'),
-        ('COED', 'Co-Ed'),
     )
     name = models.CharField(max_length=100)
     gender_type = models.CharField(max_length=10, choices=GENDER_CHOICES)

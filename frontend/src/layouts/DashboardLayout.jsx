@@ -44,7 +44,7 @@ function DashboardLayout({ children, user }) {
         <div>
           <div className="sidebar-logo">
             <div className="sidebar-logo-icon">H</div>
-            <span className="sidebar-logo-text">LurniHostel</span>
+            <span className="sidebar-logo-text">Hostel</span>
           </div>
 
           <ul className="sidebar-menu">
