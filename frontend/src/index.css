@@ -78,6 +78,7 @@ button, input, select, textarea {
   position: relative;
   display: flex;
   min-height: 100vh;
+  background-color: #121212; /* Dark outside environment to contrast with the card */
   align-items: center;
   justify-content: center;
   padding: 20px;
