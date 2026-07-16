@@ -24,6 +24,7 @@ function AuthPage({ onAuthSuccess }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   
   const navigate = useNavigate();
 
@@ -114,11 +115,16 @@ function AuthPage({ onAuthSuccess }) {
       <div className="auth-card">
         {/* Forms Side */}
         <div className="auth-form-side">
+          <div className="auth-logo">
+            <div className="auth-logo-mark">H</div>
+            <span className="auth-logo-text">Hostel</span>
+          </div>
+
           <div className="auth-header">
-            <h2>{isLogin ? 'Welcome Back! ' : 'Create Account'}</h2>
+            <h2>{isLogin ? 'Welcome Back!' : 'Create Account'}</h2>
             <p>
               {isLogin
-                ? 'Sign in to start managing your profile.'
+                ? 'Please login to continue.'
                 : 'Fill in your details below to register on the hostel portal.'}
             </p>
           </div>
@@ -221,6 +227,18 @@ function AuthPage({ onAuthSuccess }) {
               />
             </div>
 
+            {isLogin && (
+              <div className="remember-me-row">
+                <input
+                  type="checkbox"
+                  id="remember-me"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <label htmlFor="remember-me">Remember me</label>
+              </div>
+            )}
+
             {/* Student specific fields (Only shown during Sign Up for Students) */}
             {!isLogin && role === 'STUDENT' && (
               <>
@@ -290,15 +308,24 @@ function AuthPage({ onAuthSuccess }) {
               </>
             )}
 
-            {isLogin && <div className="forgot-password">Forgot Password?</div>}
+            <div className="auth-buttons-row">
+              <button
+                type="submit"
+                disabled={loading}
+                className={`btn-primary ${role === 'STUDENT' ? 'btn-emerald' : ''}`}
+              >
+                {loading ? 'Processing...' : isLogin ? 'Sign In' : 'Sign Up'}
+              </button>
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={handleToggleMode}
+              >
+                {isLogin ? 'Sign Up' : 'Sign In'}
+              </button>
+            </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className={`btn-primary ${role === 'STUDENT' ? 'btn-emerald' : ''}`}
-            >
-              {loading ? 'Processing...' : isLogin ? 'Sign In' : 'Sign Up'}
-            </button>
+            {isLogin && <div className="forgot-password">Forgot Password?</div>}
           </form>
 
           {/* Social Sign-In (Visual Placeholder matching picture 1) */}
@@ -314,18 +341,8 @@ function AuthPage({ onAuthSuccess }) {
             </>
           )}
 
-          <div className="auth-footer">
-            {isLogin ? (
-              <>
-                Don't have an account?{' '}
-                <span onClick={handleToggleMode}>Sign up now</span>
-              </>
-            ) : (
-              <>
-                Already have an account?{' '}
-                <span onClick={handleToggleMode}>Sign in now</span>
-              </>
-            )}
+          <div className="auth-footer" style={{ textAlign: 'center' }}>
+            {isLogin ? "Don't have an account? Use the Sign Up button above." : 'Already registered? Use the Sign In button above.'}
           </div>
 
           <p className="auth-copyright">© {new Date().getFullYear()} ALL RIGHTS RESERVED</p>
@@ -334,8 +351,8 @@ function AuthPage({ onAuthSuccess }) {
         {/* Artwork Panel (Still Life Painting) */}
         <div className="auth-image-side">
           <img
-            src="/bed.png"
-            alt="Dutch Golden Age Still Life Painting"
+            src="/hms.png"
+            alt="Hostel Management System"
             className="auth-painting"
           />
         </div>

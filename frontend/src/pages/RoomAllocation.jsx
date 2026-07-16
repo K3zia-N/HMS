@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Key, Layers, Users, CheckCircle2, AlertTriangle, Shuffle, Building2, BedDouble, DoorOpen, Sparkles } from 'lucide-react';
+import { Home, Key, Layers, Users, CheckCircle2, AlertTriangle, Building2, BedDouble, DoorOpen, Sparkles } from 'lucide-react';
 import api from '../api';
 
 function RoomAllocation({ user }) {
@@ -8,7 +8,6 @@ function RoomAllocation({ user }) {
   const [profile, setProfile] = useState(null);
 
   const [selectedHostel, setSelectedHostel] = useState('');
-  const [bulkResult, setBulkResult] = useState(null);
 
   const [loading, setLoading] = useState(true);
   const [allocating, setAllocating] = useState(false);
@@ -59,23 +58,6 @@ function RoomAllocation({ user }) {
       } else {
         setErrorMsg('Error connecting to allocation server.');
       }
-    } finally {
-      setAllocating(false);
-    }
-  };
-
-  const handleBulkAllocation = async () => {
-    setAllocating(true);
-    setErrorMsg('');
-    setSuccessMsg('');
-    setBulkResult(null);
-    try {
-      const response = await api.post('allocation/allocate/');
-      setBulkResult(response.data);
-      setSuccessMsg(response.data.message);
-      await fetchData();
-    } catch (err) {
-      setErrorMsg('Bulk allocation process failed.');
     } finally {
       setAllocating(false);
     }
@@ -203,20 +185,9 @@ function RoomAllocation({ user }) {
   // --- 2. ADMIN VIEW ---
   return (
     <div style={{ paddingBottom: '40px' }}>
-      <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '24px', flexWrap: 'wrap' }}>
-        <div>
-          <h2 style={{ fontSize: '1.9rem', fontWeight: '700', marginBottom: '6px' }}>Hostel Resourcing & Allocation 🏢</h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>Review occupancy rates and trigger automated room placements.</p>
-        </div>
-        <button
-          onClick={handleBulkAllocation}
-          disabled={allocating}
-          className="btn-primary btn-emerald"
-          style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '14px 26px', borderRadius: '10px', fontSize: '0.95rem', whiteSpace: 'nowrap' }}
-        >
-          <Shuffle size={18} />
-          {allocating ? 'Allocating...' : 'Run Auto-Allocation Rules'}
-        </button>
+      <div style={{ marginBottom: '32px' }}>
+        <h2 style={{ fontSize: '1.9rem', fontWeight: '700', marginBottom: '6px' }}>Hostel Resourcing & Allocation 🏢</h2>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>Review occupancy rates and room placements.</p>
       </div>
 
       {errorMsg && (
@@ -238,40 +209,6 @@ function RoomAllocation({ user }) {
         <div style={{ backgroundColor: '#EBF7F0', border: '1px solid #0A5C36', color: '#0A5C36', padding: '14px 18px', borderRadius: '10px', fontSize: '0.9rem', marginBottom: '24px', display: 'flex', gap: '10px', alignItems: 'center' }}>
           <CheckCircle2 size={20} />
           <span>{successMsg}</span>
-        </div>
-      )}
-
-      {bulkResult && (
-        <div className="panel" style={{ marginBottom: '32px', padding: '28px', borderRadius: '16px', borderLeft: '5px solid var(--emerald)', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-          <h3 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '14px' }}>Bulk Allocation Summary</h3>
-          <p style={{ fontSize: '0.92rem', marginBottom: bulkResult.allocations.length > 0 ? '18px' : 0 }}>
-            Successfully allocated <strong style={{ color: 'var(--emerald)' }}>{bulkResult.success_count}</strong> students.
-            Failed to allocate <strong style={{ color: 'var(--burgundy)' }}>{bulkResult.fail_count}</strong> students due to capacity.
-          </p>
-            {bulkResult.allocations.length > 0 && (
-            <div className="table-responsive-wrap" style={{ maxHeight: '180px', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: '10px' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', textAlign: 'left' }}>
-                <thead>
-                  <tr style={{ backgroundColor: 'var(--secondary-bg)', borderBottom: '1px solid var(--border-color)' }}>
-                    <th style={{ padding: '10px 16px' }}>Student</th>
-                    <th style={{ padding: '10px 16px' }}>Roll</th>
-                    <th style={{ padding: '10px 16px' }}>Hostel</th>
-                    <th style={{ padding: '10px 16px' }}>Room</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {bulkResult.allocations.map((a, idx) => (
-                    <tr key={idx} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                      <td style={{ padding: '10px 16px' }}>{a.student}</td>
-                      <td style={{ padding: '10px 16px' }}>{a.roll_number}</td>
-                      <td style={{ padding: '10px 16px' }}>{a.hostel}</td>
-                      <td style={{ padding: '10px 16px' }}>{a.room}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
         </div>
       )}
 
